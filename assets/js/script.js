@@ -54,31 +54,31 @@ function runGame(gameType) {
     let num2 = Math.ceil(Math.random() * 25);
 
     // checks game type - my attempt! Currently commented so as not to wreck stuff. Seems to work great though!
-    // switch (gameType) {
-    //     case 'addition':
-    //         displayAdditionQuestion(num1, num2);
-    //         break;
-    //     case 'subtract':
-    //         displaySubtractQuestion(num1, num2);
-    //         break;
-    //     case 'multiply':
-    //         displayMultiplyQuestion(num1, num2);
-    //         break;
-    //     case 'division':
-    //         displayDivisionQuestion(num1, num2);
-    //         break;
-    //     default:
-    //         alert(`Unknown game type: ${gameType}.`)
-    //         throw `Unknown game type: ${gameType}. Aborting!`
-    // }
-
-    // original code at this point in the lesson:
-    if (gameType === 'addition') {
-        displayAdditionQuestion(num1, num2);
-    } else {
-        alert(`Unknown game type: ${gameType}.`)
-        throw `Unknown game type: ${gameType}. Aborting!`
+    switch (gameType) {
+        case 'addition':
+            displayAdditionQuestion(num1, num2);
+            break;
+        case 'subtract':
+            displaySubtractQuestion(num1, num2);
+            break;
+        case 'multiply':
+            displayMultiplyQuestion(num1, num2);
+            break;
+        case 'division':
+            displayDivisionQuestion(num1, num2);
+            break;
+        default:
+            alert(`Unknown game type: ${gameType}.`)
+            throw `Unknown game type: ${gameType}. Aborting!`
     }
+
+    // Original code at the point in the lesson that I coded my attempt:
+    // if (gameType === 'addition') {
+    //     displayAdditionQuestion(num1, num2);
+    // } else {
+    //     alert(`Unknown game type: ${gameType}.`)
+    //     throw `Unknown game type: ${gameType}. Aborting!`
+    // }
 
     // Reset answer box!
     document.getElementById('answer-box').value = null;
@@ -96,9 +96,11 @@ function checkAnswer() {
     let isCorrect = userAnswer === calculatedAnswer[0];
 
     if (isCorrect) {
-        alert("That's correct! Well done.")
+        alert("That's correct! Well done.");
+        incrementScore();
     } else {
-        alert(`${userAnswer} is incorrect. The correct answer is ${calculatedAnswer[0]}.`)
+        alert(`${userAnswer} is incorrect. The correct answer is ${calculatedAnswer[0]}.`);
+        incrementWrongAnswer();
     }
 
     runGame(calculatedAnswer[1]);
@@ -116,36 +118,42 @@ function calculateCorrectAnswer() {
     let operator = document.getElementById('operator').innerText;
 
     //Find game type
-    // My attempt at getting ahead of the lesson. Commented out for now. All seems to work!
-    // switch (operator) {
-    //     case "+":
-    //         return [operand1 + operand2, "addition"];
-    //     case "-":
-    //         return [operand1 - operand2, "subtract"];
-    //     case "x":
-    //         return [operand1 * operand2, "multiply"];
-    //     case "/":
-    //         return [operand1 / operand2, "division"];   
-    //     default:
-    //         alert(`Unimplemented operator: ${operator}.`);
-    //         throw `Unimplemented operator: ${operator}. Aborting!`;
-    // }
-
-    //Original code
-    if (operator === "+") {
-        return [operand1 + operand2, "addition"];
-    } else {
-        alert(`Unimplemented operator: ${operator}.`);
-        throw `Unimplemented operator: ${operator}. Aborting!`
+    // My attempt. All seems to work!
+    switch (operator) {
+        case "+":
+            return [operand1 + operand2, "addition"];
+        case "-":
+            return [operand1 - operand2, "subtract"];
+        case "x":
+            return [operand1 * operand2, "multiply"];
+        case "/":
+            return [operand1 / operand2, "division"];   
+        default:
+            alert(`Unimplemented operator: ${operator}.`);
+            throw `Unimplemented operator: ${operator}. Aborting!`;
     }
+
+    //Original code when I made my attempt:
+    // if (operator === "+") {
+    //     return [operand1 + operand2, "addition"];
+    // } else {
+    //     alert(`Unimplemented operator: ${operator}.`);
+    //     throw `Unimplemented operator: ${operator}. Aborting!`
+    // }
 }
 
+/**
+ * Adds to the correct answers count.
+ */
 function incrementScore() {
-
+    document.getElementById('score').innerText++;
 }
 
+/**
+ * Adds to the incorrect answers count.
+ */
 function incrementWrongAnswer() {
-
+    document.getElementById('incorrect').innerText++;
 }
 
 /**
