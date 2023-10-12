@@ -12,11 +12,11 @@
 */
 
 // Wait for the DOM to finish loading before running the game
-// Get the button elements and add event listeners to them
-
 document.addEventListener("DOMContentLoaded", function() {
+    // Get the button elements
     let buttons = document.getElementsByTagName("button");
-
+    
+    //... and add event listeners to them
     for (let button of buttons) {
         button.addEventListener("click", function() {
             if (this.getAttribute("data-type") === "submit") {
@@ -29,8 +29,24 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 })
 
-function runGame() {
+// Going to use Math.random() to generate numbers between 1 and 25. Let's make an attempt at code that can work...
 
+// let operandOne = Math.ceil(Math.random() * 25);
+// let operandTwo = Math.ceil(Math.random() * 25);
+
+/* This code creates two random numbers between 1 and 25! They're assigned to the operandOne and operandTwo variables.
+   It's different than the model given - Amanda instead uses Math.floor(Math.random() * 25) + 1, which is about the
+   same, I think.
+*/
+
+/**
+ * The main game 'loop', called when the script is first loaded and
+ * after the user's answer has been processed
+ */
+function runGame() {
+    // Uses my version of the random number generation between 1 and 25.
+    let num1 = Math.ceil(Math.random() * 25);
+    let num2 = Math.ceil(Math.random() * 25);
 }
 
 function checkAnswer() {
