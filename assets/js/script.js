@@ -53,7 +53,7 @@ function runGame(gameType) {
     let num1 = Math.ceil(Math.random() * 25);
     let num2 = Math.ceil(Math.random() * 25);
 
-    // checks game type - my attempt! Currently commented so as not to wreck stuff.
+    // checks game type - my attempt! Currently commented so as not to wreck stuff. Seems to work great though!
     // switch (gameType) {
     //     case 'addition':
     //         displayAdditionQuestion(num1, num2);
@@ -104,15 +104,24 @@ function displayAdditionQuestion(operand1, operand2) {
     document.getElementById('operator').textContent = "+";
 }
 
-function displaySubtractQuestion() {
-
+function displaySubtractQuestion(operand1, operand2) {
+    // Question setup - gets the two numbers and the operator
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = "-";
 }
 
-function displayMultiplyQuestion() {
-
+function displayMultiplyQuestion(operand1, operand2) {
+    // Question setup - gets the two numbers and the operator
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = "x";
 }
 
 // This is the one I did.
-function displayDivisionQuestion() {
-
+function displayDivisionQuestion(operand1, operand2) {
+    // Question setup - gets the two numbers and the operator
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = "/";
 }
