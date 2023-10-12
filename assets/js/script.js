@@ -53,7 +53,7 @@ function runGame(gameType) {
     let num1 = Math.ceil(Math.random() * 25);
     let num2 = Math.ceil(Math.random() * 25);
 
-    // checks game type - my attempt! Currently commented so as not to wreck stuff. Seems to work great though!
+    // checks game type - my attempt! Seems to work great!
     switch (gameType) {
         case 'addition':
             displayAdditionQuestion(num1, num2);
@@ -176,9 +176,11 @@ function displayAdditionQuestion(operand1, operand2) {
  * @param {*} operand2 the second number.
  */
 function displaySubtractQuestion(operand1, operand2) {
-    // Question setup - gets the two numbers and the operator
-    document.getElementById('operand1').textContent = operand1;
-    document.getElementById('operand2').textContent = operand2;
+    /* Question setup - gets the two numbers and the operator.
+       Slightly different - we don't want negative numbers as 
+       our answers, so operand1 on the document has to be larger. */
+    document.getElementById('operand1').textContent = Math.max(operand1, operand2);
+    document.getElementById('operand2').textContent = Math.min(operand1, operand2);
     document.getElementById('operator').textContent = "-";
 }
 
@@ -203,8 +205,10 @@ function displayMultiplyQuestion(operand1, operand2) {
  * @param {*} operand2 the second number.
  */
 function displayDivisionQuestion(operand1, operand2) {
-    // Question setup - gets the two numbers and the operator
-    document.getElementById('operand1').textContent = operand1;
-    document.getElementById('operand2').textContent = operand2;
+    /* Question setup - gets the two numbers and the operator.
+       Again, we want to make this easy, so divide a larger number by
+       a smaller one. operand1 on the document has to be larger. */
+    document.getElementById('operand1').textContent = Math.max(operand1, operand2);
+    document.getElementById('operand2').textContent = Math.min(operand1, operand2);
     document.getElementById('operator').textContent = "/";
 }
