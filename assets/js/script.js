@@ -215,8 +215,9 @@ function displayMultiplyQuestion(operand1, operand2) {
 function displayDivisionQuestion(operand1, operand2) {
     /* Question setup - gets the two numbers and the operator.
        Again, we want to make this easy, so divide a larger number by
-       a smaller one. operand1 on the document has to be larger. */
-    document.getElementById('operand1').textContent = Math.max(operand1, operand2);
-    document.getElementById('operand2').textContent = Math.min(operand1, operand2);
+       a smaller one. I just multiplied the two numbers as Amanda probably
+       did. */
+    document.getElementById('operand1').textContent = operand1 * operand2;
+    document.getElementById('operand2').textContent = operand2;
     document.getElementById('operator').textContent = "/";
 }
