@@ -20,10 +20,10 @@ document.addEventListener("DOMContentLoaded", function() {
     for (let button of buttons) {
         button.addEventListener("click", function() {
             if (this.getAttribute("data-type") === "submit") {
-                alert("You clicked Submit!");
+                checkAnswer(); // Clicking submit checks your answer against the correct one.
             } else {
                 let gameType = this.getAttribute("data-type");
-                runGame(gameType);
+                runGame(gameType); // Clicking a button type sets the game to that type.
             }
         })
     }
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 /**
  * The main game 'loop', called when the script is first loaded and
- * after the user's answer has been processed
+ * after the user's answer has been processed.
  */
 function runGame(gameType) {
     
@@ -79,14 +79,65 @@ function runGame(gameType) {
         alert(`Unknown game type: ${gameType}.`)
         throw `Unknown game type: ${gameType}. Aborting!`
     }
+
+    // Reset answer box!
+    document.getElementById('answer-box').value = null;
+
 }
 
+/**
+ * Checks the user's answer against the first element in
+ * the returned calculateCorrectAnswer array.
+ */
 function checkAnswer() {
+    
+    let userAnswer = parseInt(document.getElementById('answer-box').value);
+    let calculatedAnswer = calculateCorrectAnswer();
+    let isCorrect = userAnswer === calculatedAnswer[0];
+
+    if (isCorrect) {
+        alert("That's correct! Well done.")
+    } else {
+        alert(`${userAnswer} is incorrect. The correct answer is ${calculatedAnswer[0]}.`)
+    }
+
+    runGame(calculatedAnswer[1]);
 
 }
 
+/**
+ * Gets the operands (the two numbers) and the operator (plus, minus, etc) from
+ * the DOM, and returns the correct answer.
+ */
 function calculateCorrectAnswer() {
+    // Gets the values from the DOM. parseInt treats the result as an integer.
+    let operand1 = parseInt(document.getElementById('operand1').innerText);
+    let operand2 = parseInt(document.getElementById('operand2').innerText);
+    let operator = document.getElementById('operator').innerText;
 
+    //Find game type
+    // My attempt at getting ahead of the lesson. Commented out for now. All seems to work!
+    // switch (operator) {
+    //     case "+":
+    //         return [operand1 + operand2, "addition"];
+    //     case "-":
+    //         return [operand1 - operand2, "subtract"];
+    //     case "x":
+    //         return [operand1 * operand2, "multiply"];
+    //     case "/":
+    //         return [operand1 / operand2, "division"];   
+    //     default:
+    //         alert(`Unimplemented operator: ${operator}.`);
+    //         throw `Unimplemented operator: ${operator}. Aborting!`;
+    // }
+
+    //Original code
+    if (operator === "+") {
+        return [operand1 + operand2, "addition"];
+    } else {
+        alert(`Unimplemented operator: ${operator}.`);
+        throw `Unimplemented operator: ${operator}. Aborting!`
+    }
 }
 
 function incrementScore() {
@@ -97,6 +148,12 @@ function incrementWrongAnswer() {
 
 }
 
+/**
+ * Generates an addition question.
+ * Operator is the + sign.
+ * @param {*} operand1 the first number.
+ * @param {*} operand2 the second number.
+ */
 function displayAdditionQuestion(operand1, operand2) {
     // Question setup - gets the two numbers and the operator
     document.getElementById('operand1').textContent = operand1;
@@ -104,6 +161,12 @@ function displayAdditionQuestion(operand1, operand2) {
     document.getElementById('operator').textContent = "+";
 }
 
+/**
+ * Generates a subtraction question.
+ * Operator is the - sign.
+ * @param {*} operand1 the first number.
+ * @param {*} operand2 the second number.
+ */
 function displaySubtractQuestion(operand1, operand2) {
     // Question setup - gets the two numbers and the operator
     document.getElementById('operand1').textContent = operand1;
@@ -111,6 +174,12 @@ function displaySubtractQuestion(operand1, operand2) {
     document.getElementById('operator').textContent = "-";
 }
 
+/**
+ * Generates a multiplication question.
+ * Operator is the x sign.
+ * @param {*} operand1 the first number.
+ * @param {*} operand2 the second number.
+ */
 function displayMultiplyQuestion(operand1, operand2) {
     // Question setup - gets the two numbers and the operator
     document.getElementById('operand1').textContent = operand1;
@@ -119,6 +188,12 @@ function displayMultiplyQuestion(operand1, operand2) {
 }
 
 // This is the one I did.
+/**
+ * Generates a division question.
+ * Operator is the / sign.
+ * @param {*} operand1 the first number.
+ * @param {*} operand2 the second number.
+ */
 function displayDivisionQuestion(operand1, operand2) {
     // Question setup - gets the two numbers and the operator
     document.getElementById('operand1').textContent = operand1;
