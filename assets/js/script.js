@@ -27,6 +27,13 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
     }
+    
+    // Lets you press enter to answer the question
+    document.getElementById('answer-box').addEventListener('keydown', function(event) {
+        if (event.key === "Enter") {
+            checkAnswer();
+        }
+    });
 
     // Set the initial game type to 'addition'.
     runGame("addition");
@@ -48,6 +55,10 @@ document.addEventListener("DOMContentLoaded", function() {
  * after the user's answer has been processed.
  */
 function runGame(gameType) {
+    
+    // Reset answer box and focus on it automatically
+    document.getElementById('answer-box').value = null;
+    document.getElementById('answer-box').focus();
     
     // Uses my version of the random number generation between 1 and 25.
     let num1 = Math.ceil(Math.random() * 25);
@@ -79,9 +90,6 @@ function runGame(gameType) {
     //     alert(`Unknown game type: ${gameType}.`)
     //     throw `Unknown game type: ${gameType}. Aborting!`
     // }
-
-    // Reset answer box!
-    document.getElementById('answer-box').value = null;
 
 }
 
